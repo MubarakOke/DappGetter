@@ -31,23 +31,22 @@ function App() {
     if(contract && connected){
       try {
         const transaction= await contract.getMessage()
-        console.log("transaction", transaction)
         setSmartValue(transaction)
       }
       catch(e){
-        console.log("message got")
+        console.log("message not gotten")
       }
     }
   }
 
-  async function setMessage(value){
+  async function setMessage(){
     if(contract && connected){
       try {
         const transaction= await contract.setMessage(value)
         await transaction.wait()
       }
       catch(e){
-        console.log("message set")
+        console.log("message not set")
       }
     }
   }
