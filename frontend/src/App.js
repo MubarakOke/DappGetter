@@ -27,7 +27,8 @@ function App() {
     } 
   }
 
-  async function getMessage(){
+  async function getMessage(e){
+    e.preventDefault()
     if(contract && connected){
       try {
         const transaction= await contract.getMessage()
@@ -39,11 +40,13 @@ function App() {
     }
   }
 
-  async function setMessage(){
+  async function setMessage(e){
+    e.preventDefault()
     if(contract && connected){
       try {
         const transaction= await contract.setMessage(value)
         await transaction.wait()
+        console.log("Owo ti drop ooooooo")
       }
       catch(e){
         console.log("message not set")
@@ -58,16 +61,16 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={handleConnected}>Connect</button><small>{connected?" connected":" not connected"}</small>
+      <button onClick={(e)=>{handleConnected(e)}}>Connect</button><small>{connected?" connected":" not connected"}</small>
       <header className="App-header">
         <div>
           <input type="textbox" value={value} onChange={handleChange} />
-          <button onClick={setMessage}>
+          <button onClick={(e)=>{setMessage(e)}}>
             Set Message
           </button>
         </div>
         <div>
-          <button onClick={getMessage}>
+          <button onClick={(e)=>{getMessage(e)}}>
             Get Message
           </button>
           <div style={{width: "80px", height: "80px", borderColor: "black", color: "black"}}>{smartValue}</div>
